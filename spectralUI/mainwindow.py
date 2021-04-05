@@ -9,7 +9,7 @@
 #
 # spectralUI is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
@@ -24,6 +24,7 @@ from PySide2.QtWidgets import QAction, QMainWindow, QMessageBox
 import spectralUI
 from spectralUI import instancehandler as ih
 from spectralUI import variabledefintions as vd
+from spectralUI.mainwidget import MainWidget
 
 
 class MainWindow(QMainWindow):
@@ -31,6 +32,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+
+        ih.MAIN_WIN = self
 
         self.settings = QSettings()
 
@@ -50,6 +53,9 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(icon_path))
 
         self.init_menu()
+
+        self.main_widget = MainWidget()
+        self.setCentralWidget(self.main_widget)
 
     def init_menu(self):
         """Initialize menu"""
@@ -110,7 +116,7 @@ class MainWindow(QMainWindow):
             "</p>",
         )
 
-    def closeEvent(self, event: QCloseEvent) -> None:
+    def closeEvent(self, event: QCloseEvent):
         """Actions to perform on window close
 
         :param event: triggering event

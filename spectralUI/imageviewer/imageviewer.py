@@ -15,16 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from spectralUI import variabledefintions as vd
-from spectralUI.backend.spectral2rgb.converter import spectral2rgb
+from PySide2.QtWidgets import QTabWidget
+
+from spectralUI.imageviewer.colorimageviewer.colorimageviewer import ColorImageViewer
+from spectralUI.imageviewer.spectralimageviewer.spectralimageviewer import (
+    SpectralImageViewer,
+)
 
 
-def get_color_image():
-    """Get sRGB color image for the spectral image"""
-    illuminant = vd.DEFAULT_ILLUMINANT
-    cie_standard_observer_year = vd.DEFAULT_OBSERVER
-    threshold = vd.DEFAULT_THRESHOLD
+class ImageViewer(QTabWidget):
+    """Image Viewer"""
 
-    color_image = spectral2rgb(illuminant, cie_standard_observer_year, threshold)
+    def __init__(self):
+        super().__init__()
 
-    return color_image
+        self.spectral_image_viewer = SpectralImageViewer()
+        self.color_image_viewer = ColorImageViewer()
+
+        self.addTab(self.spectral_image_viewer, "Spectral Image")
+        self.addTab(self.color_image_viewer, "sRGB Color Image and 3D cube")

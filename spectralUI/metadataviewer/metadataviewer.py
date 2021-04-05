@@ -15,16 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from spectralUI import variabledefintions as vd
-from spectralUI.backend.spectral2rgb.converter import spectral2rgb
+from PySide2.QtWidgets import QGroupBox, QVBoxLayout
+
+from spectralUI.metadataviewer.metadata import Metadata
 
 
-def get_color_image():
-    """Get sRGB color image for the spectral image"""
-    illuminant = vd.DEFAULT_ILLUMINANT
-    cie_standard_observer_year = vd.DEFAULT_OBSERVER
-    threshold = vd.DEFAULT_THRESHOLD
+class MetadataViewer(QGroupBox):
+    """Metadata viewer"""
 
-    color_image = spectral2rgb(illuminant, cie_standard_observer_year, threshold)
+    def __init__(self):
+        super().__init__()
 
-    return color_image
+        self.setTitle("Metadata")
+
+        self.layout = QVBoxLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setSpacing(0)
+
+        self.metadata = Metadata()
+
+        self.layout.addWidget(self.metadata)
+
+        self.setLayout(self.layout)

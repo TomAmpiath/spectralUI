@@ -9,7 +9,7 @@
 #
 # spectralUI is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
@@ -25,8 +25,7 @@ from spectralUI.backend.spectral2rgb.illuminant import get_illuminant
 from spectralUI.backend.spectral2rgb.observer import get_standard_observer
 
 
-def spectral2rgb(illuminant, cie_standard_observer_year, threshold
-                 ):
+def spectral2rgb(illuminant, cie_standard_observer_year, threshold):
     """Function to convert spectral image to sRGB color image
 
     :param illuminant: reference illuminant to be used
