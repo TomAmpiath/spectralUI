@@ -18,3 +18,5 @@
 DEFAULT_COLOR_MAP = "viridis"
 DEFAULT_STYLE = None  # initialized as none. later updated when app
 # is ran for the first time
+MIN_WINDOW_WIDTH = 800
+MIN_WINDOW_HEIGTH = 600

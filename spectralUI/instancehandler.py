@@ -15,7 +15,5 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from spectralUI.app import main
-
-if __name__ == "__main__":
-    main()
+# list of cached instances
+APP_INST = None

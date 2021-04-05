@@ -26,6 +26,4 @@ __version__ = "0.0.1"
 __name__ = "spectralUI"
 __application_name__ = "spectralUI Qt"
 __version_info__ = tuple(int(part) for part in __version__.split("."))
-__description__ = (
-    "An open-source cross-platform general purpose tool for analyzing multispectral and hyperspectral images"
-)
+__description__ = "An open-source cross-platform general purpose tool for analyzing multispectral and hyperspectral images"
