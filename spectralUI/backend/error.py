@@ -20,10 +20,11 @@ import sys
 # Error Levels
 CRITICAL, WARNING, INFO = range(3)
 
-ERROR_RANGE = 4
+ERROR_RANGE = 5
 
 # Error IDs
 (
+    NO_ERROR,
     FILE_NOT_FOUND,
     NO_SPECTRAL_DATA,
     UNKNOWN_FORMAT,
