@@ -15,11 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-DEFAULT_COLOR_MAP = "viridis"
-DEFAULT_STYLE = None  # initialized as none. later updated when app
-# is ran for the first time
-MIN_WINDOW_WIDTH = 800
-MIN_WINDOW_HEIGTH = 600
-DEFAULT_ILLUMINANT = 65
-DEFAULT_OBSERVER = 1931
-DEFAULT_THRESHOLD = 0.002
+from spectralUI import cachedvariables as cv
+
+
+def get_spectral_signature(pixel_coordinate=(0, 0)):
+    """Function to get spectral signature at given pixel coordinate
+
+    :param: pixel coordinate (default (0, 0))
+
+    :return: spectral signature
+    """
+    x, y = int(pixel_coordinate[1]), int(pixel_coordinate[0])
+    return cv.DATACUBE[x, y, :]

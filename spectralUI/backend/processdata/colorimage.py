@@ -15,11 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-DEFAULT_COLOR_MAP = "viridis"
-DEFAULT_STYLE = None  # initialized as none. later updated when app
-# is ran for the first time
-MIN_WINDOW_WIDTH = 800
-MIN_WINDOW_HEIGTH = 600
-DEFAULT_ILLUMINANT = 65
-DEFAULT_OBSERVER = 1931
-DEFAULT_THRESHOLD = 0.002
+from spectralUI.backend.spectral2rgb.converter import spectral2rgb
+from spectralUI import variabledefintions as vd
+
+def get_color_image():
+    """Get sRGB color image for the spectral image"""
+    illuminant = vd.DEFAULT_ILLUMINANT
+    cie_standard_observer_year = vd.DEFAULT_OBSERVER
+    threshold = vd.DEFAULT_THRESHOLD
+
+    color_image = spectral2rgb(illuminant, cie_standard_observer_year, threshold)
+
+    return color_image

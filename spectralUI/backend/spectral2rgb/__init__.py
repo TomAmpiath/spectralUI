@@ -14,12 +14,3 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
-
-DEFAULT_COLOR_MAP = "viridis"
-DEFAULT_STYLE = None  # initialized as none. later updated when app
-# is ran for the first time
-MIN_WINDOW_WIDTH = 800
-MIN_WINDOW_HEIGTH = 600
-DEFAULT_ILLUMINANT = 65
-DEFAULT_OBSERVER = 1931
-DEFAULT_THRESHOLD = 0.002
