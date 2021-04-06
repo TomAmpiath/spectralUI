@@ -15,15 +15,30 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from spectralUI import cachedvariables as cv
+import sys
+
+from PySide2.QtWidgets import QMessageBox
+
+from spectralUI.backend import error
 
 
-def get_spectral_signature(pixel_coordinate=(0, 0)):
-    """Function to get spectral signature at given pixel coordinate
+def error_popup(error_id):
+    """Function to display error popup window
 
-    :param: pixel coordinate (default (0, 0))
+    :param error_id: error id
 
-    :return: spectral signature
+    :return: None
     """
-    x, y = int(pixel_coordinate[1]), int(pixel_coordinate[0])
-    return cv.DATACUBE[x, y, :]
+    msg = error.get_error_message(error_id)
+    lvl = error.get_error_level(error_id)
+
+    message_box = QMessageBox()
+    message_box.setWindowTitle(lvl)
+    message_box.setText(msg)
+    icon = QMessageBox.Critical if lvl == error.CRITICAL else QMessageBox.Warning
+    message_box.setIcon(icon)
+
+    message_box.exec_()
+
+    if lvl == error.CRITICAL:
+        sys.exit(1)

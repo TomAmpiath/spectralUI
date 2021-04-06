@@ -17,12 +17,9 @@
 
 import sys
 
-from PySide2.QtCore import QCoreApplication, QSettings
-from PySide2.QtWidgets import QApplication, QStyleFactory
+from PySide2.QtWidgets import QApplication
 
-import spectralUI
 from spectralUI import instancehandler as ih
-from spectralUI import variabledefintions as vd
 from spectralUI.mainwindow import MainWindow
 
 
@@ -38,21 +35,6 @@ class Application(QApplication):
         main_window.show()
 
         sys.exit(self.exec_())
-
-    def init_settings(self):
-        """Initialize application settings"""
-        settings = QSettings()
-
-        QCoreApplication.setOrganizationName("spectralUI")
-        QCoreApplication.setApplicationName(spectralUI.__application_name__)
-        QCoreApplication.setApplicationVersion(spectralUI.__version__)
-
-        # check if settings has already been initialized or not
-        # if not, then make new settings with default values
-        if not settings.contains("color map"):
-            settings.setValue("color map", vd.DEFAULT_COLOR_MAP)
-            vd.DEFAULT_STYLE = QStyleFactory.keys()[0]
-            settings.setValue("style", vd.DEFAULT_STYLE)
 
 
 def main():

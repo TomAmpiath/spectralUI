@@ -17,6 +17,8 @@
 
 from numpy import amax, amin, mean
 
+from spectralUI import cachedvariables as cv
+
 properties_list = [
     "Height",
     "Width",
@@ -32,14 +34,14 @@ def get_properties_list():
     return properties_list
 
 
-def get_metadata(datacube, band_number=0):
+def get_metadata(band_number=0):
     """Returns a dictionary containing metadata or error code if any error occurs.
 
-    :param datacube: spectral datacube as a numpy ndarray object.
     :param band_number: current band number (default 0)
 
     :return: metadata dictionary
     """
+    datacube = cv.DATACUBE
     metadata = [
         str(datacube.shape[0]),
         str(datacube.shape[1]),

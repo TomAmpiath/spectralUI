@@ -45,7 +45,7 @@ def spectral2rgb(illuminant, cie_standard_observer_year, threshold):
     zbar = observer["zbar"]
 
     illuminant = get_illuminant(illuminant)
-    illuminant_wavelength = [w for w in range(380, 781, 5)]
+    illuminant_wavelength = [w for w in range(300, 781, 5)]
 
     # interpolate to image wavelength
     illuminant = PchipInterpolator(illuminant_wavelength, illuminant, extrapolate=True)(

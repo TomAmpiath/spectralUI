@@ -25,6 +25,8 @@ matplotlib.use("Qt5Agg")
 from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih
 
+from PySide2.QtCore import QSettings
+
 
 class SpectralImage(FigureCanvasQTAgg):
     """Spectral image canvas"""
@@ -51,7 +53,9 @@ class SpectralImage(FigureCanvasQTAgg):
             image = np.rot90(image)
             cv.ROTATION_FLAG = True
 
-        self.cax = self.axes.imshow(image, cmap=cv.CURRENT_CMAP)
+        self.settings = QSettings("spectralUI", "spectralUI Prototype")
+
+        self.cax = self.axes.imshow(image, cmap=self.settings.value("color map"))
         self.draw()
 
         spectral_signature = ih.SPCTRL_SIG_INST

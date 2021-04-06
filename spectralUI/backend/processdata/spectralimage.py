@@ -23,9 +23,7 @@ def get_spectral_image(band_number=0):
 
     :param band_number: band number (default 0)
 
-    :return: spectral image at given band number
+    :return: None
     """
     spectral_image = cv.DATACUBE[:, :, band_number]
     cv.CURRENT_IMAGE = spectral_image
-
-    return spectral_image

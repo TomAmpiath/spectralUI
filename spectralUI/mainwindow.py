@@ -19,11 +19,18 @@ import os
 
 from PySide2.QtCore import QSettings
 from PySide2.QtGui import QCloseEvent, QIcon
-from PySide2.QtWidgets import QAction, QMainWindow, QMessageBox
+from PySide2.QtWidgets import QAction, QFileDialog, QMainWindow, QMessageBox, QStyleFactory
 
 import spectralUI
+from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih
 from spectralUI import variabledefintions as vd
+from spectralUI.backend import error
+from spectralUI.backend.io.loadfile import load_file
+from spectralUI.backend.metadata import get_metadata
+from spectralUI.backend.processdata.colorimage import get_color_image
+from spectralUI.backend.processdata.spectralimage import get_spectral_image
+from spectralUI.errorpopup import error_popup
 from spectralUI.mainwidget import MainWidget
 
 
@@ -35,7 +42,7 @@ class MainWindow(QMainWindow):
 
         ih.MAIN_WIN = self
 
-        self.settings = QSettings()
+        self.settings = QSettings("spectralUI", "spectralUI Prototype")
 
         # reset window size and position to last used values
         try:
@@ -43,6 +50,15 @@ class MainWindow(QMainWindow):
             self.move(self.settings.value("window position"))
         except:
             pass
+
+        # initialize color map and app style if settings does not exist
+        if not self.settings.contains("color map"):
+            self.settings.setValue("color map", vd.DEFAULT_COLOR_MAP)
+        if not self.settings.contains("style"):
+            self.settings.setValue("style", QStyleFactory.keys()[0])
+        cv.CURRENT_CMAP = self.settings.value("color map")
+        cv.CURRENT_STYLE = self.settings.value("style")
+        ih.APP_INST.setStyle(cv.CURRENT_STYLE)
 
         self.setWindowTitle(spectralUI.__application_name__)
         self.setMinimumSize(vd.MIN_WINDOW_WIDTH, vd.MIN_WINDOW_HEIGTH)
@@ -85,10 +101,64 @@ class MainWindow(QMainWindow):
         self.help_menu.addAction(self.about_qt_action)
 
         # triggers===============================
+        self.open_action.triggered.connect(self.open_file)
         self.exit_action.triggered.connect(self.close)
 
         self.about_action.triggered.connect(self.display_about)
         self.about_qt_action.triggered.connect(ih.APP_INST.aboutQt)
+
+    def open_file(self):
+        """Handle file opening"""
+        file, _ = QFileDialog.getOpenFileName(
+            None, "Select Spectral Image File", "", "Image File (*.mat)"
+        )
+
+        if file:
+            self.update_data(file)
+
+    def update_data(self, file=None, band_number=0):
+        """Function to update all widgets"""
+        datacube = cv.DATACUBE
+        if file:
+            result = load_file(file)
+
+            if result != error.NO_ERROR:
+                error_popup(result)
+                return
+            else:
+                datacube = cv.DATACUBE
+                if cv.WAVELENGTH_LIST is None:
+                    pass  # wavelength window here
+
+            sRGB_image = get_color_image()
+            cv.COLOR_IMAGE = sRGB_image
+
+            color_image_canvas = ih.CLR_IMG_INST
+            color_image_canvas.update_canvas()
+
+            color_image_viewer = ih.CLR_IMG_VIEW_INST
+            color_image_viewer.open_viewer_button.setEnabled(True)
+
+            spectral_image_navbar = ih.SPCTRL_IMG_NAV_INST
+            spectral_image_navbar.band_selection_combobox.clear()
+
+            for band in range(0, datacube.shape[2]):
+                spectral_image_navbar.band_selection_combobox.addItem(str(band))
+
+            spectral_image_navbar.band_selection_combobox.setCurrentIndex(0)
+
+            spectral_signature_canvas = ih.SPCTRL_SIG_INST
+            spectral_signature_canvas.clear_canvas()
+
+        metadata = get_metadata(band_number)
+        get_spectral_image(band_number)
+
+        metadata_table = ih.MDATA_INST
+        metadata_table.update_table(metadata, band_number)
+
+        spectral_image_canvas = ih.SPCTRL_IMG_INST
+        spectral_image_canvas.update_canvas()
+        spectral_image_canvas.update_colorbar()
 
     def display_about(self):
         """About dialog for application"""
