@@ -38,6 +38,7 @@ from spectralUI.backend.processdata.colorimage import get_color_image
 from spectralUI.backend.processdata.spectralimage import get_spectral_image
 from spectralUI.errorpopup import error_popup
 from spectralUI.mainwidget import MainWidget
+from spectralUI.wavelengthwindow.wavelengthwindow import WavelengthWindow
 
 
 class MainWindow(QMainWindow):
@@ -134,7 +135,10 @@ class MainWindow(QMainWindow):
             else:
                 datacube = cv.DATACUBE
                 if cv.WAVELENGTH_LIST is None:
-                    pass  # wavelength window here
+                    wavelength_window = WavelengthWindow()
+                    wavelength_window.exec_()
+                    if wavelength_window.result() == 0:
+                        return
 
             sRGB_image = get_color_image()
             cv.COLOR_IMAGE = sRGB_image

@@ -14,14 +14,3 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
-
-# list of cached instances
-APP_INST = None
-MAIN_WIN = None
-SPCTRL_IMG_INST = None
-SPCTRL_IMG_NAV_INST = None
-MDATA_INST = None
-SPCTRL_SIG_INST = None
-CLR_IMG_VIEW_INST = None
-CLR_IMG_INST = None
-WAVE_WIN = None
