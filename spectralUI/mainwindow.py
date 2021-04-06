@@ -19,7 +19,13 @@ import os
 
 from PySide2.QtCore import QSettings
 from PySide2.QtGui import QCloseEvent, QIcon
-from PySide2.QtWidgets import QAction, QFileDialog, QMainWindow, QMessageBox, QStyleFactory
+from PySide2.QtWidgets import (
+    QAction,
+    QFileDialog,
+    QMainWindow,
+    QMessageBox,
+    QStyleFactory,
+)
 
 import spectralUI
 from spectralUI import cachedvariables as cv

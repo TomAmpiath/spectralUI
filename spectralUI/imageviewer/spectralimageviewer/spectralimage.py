@@ -22,10 +22,10 @@ from matplotlib.figure import Figure
 
 matplotlib.use("Qt5Agg")
 
+from PySide2.QtCore import QSettings
+
 from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih
-
-from PySide2.QtCore import QSettings
 
 
 class SpectralImage(FigureCanvasQTAgg):
