@@ -38,6 +38,7 @@ from spectralUI.backend.processdata.colorimage import get_color_image
 from spectralUI.backend.processdata.spectralimage import get_spectral_image
 from spectralUI.errorpopup import error_popup
 from spectralUI.mainwidget import MainWidget
+from spectralUI.settingswindow.settingswindow import SettingsWindow
 from spectralUI.wavelengthwindow.wavelengthwindow import WavelengthWindow
 
 
@@ -62,7 +63,9 @@ class MainWindow(QMainWindow):
         if not self.settings.contains("color map"):
             self.settings.setValue("color map", vd.DEFAULT_COLOR_MAP)
         if not self.settings.contains("style"):
-            self.settings.setValue("style", QStyleFactory.keys()[0])
+            vd.DEFAULT_STYLE = QStyleFactory.keys()[0]
+            self.settings.setValue("style", vd.DEFAULT_STYLE)
+
         cv.CURRENT_CMAP = self.settings.value("color map")
         cv.CURRENT_STYLE = self.settings.value("style")
         ih.APP_INST.setStyle(cv.CURRENT_STYLE)
@@ -110,6 +113,8 @@ class MainWindow(QMainWindow):
         # triggers===============================
         self.open_action.triggered.connect(self.open_file)
         self.exit_action.triggered.connect(self.close)
+
+        self.settings_action.triggered.connect(self.open_settings_window)
 
         self.about_action.triggered.connect(self.display_about)
         self.about_qt_action.triggered.connect(ih.APP_INST.aboutQt)
@@ -169,6 +174,15 @@ class MainWindow(QMainWindow):
         spectral_image_canvas = ih.SPCTRL_IMG_INST
         spectral_image_canvas.update_canvas()
         spectral_image_canvas.update_colorbar()
+
+    def open_settings_window(self):
+        """Open settings winddow"""
+        self.settings_window = SettingsWindow()
+        self.settings_window.exec_()
+        if self.settings_window.result() == 0:
+            cv.CURRENT_STYLE = self.settings.value("style")
+            cv.CURRENT_CMAP = self.settings.value("color map")
+            ih.APP_INST.setStyle(cv.CURRENT_STYLE)
 
     def display_about(self):
         """About dialog for application"""
