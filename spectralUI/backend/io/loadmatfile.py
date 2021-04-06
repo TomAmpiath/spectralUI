@@ -62,5 +62,7 @@ def load_mat_file(file):
     cv.DATACUBE = mat_file[var_name]
     if wl is not None:
         cv.WAVELENGTH_LIST = np.squeeze(mat_file[wl]).tolist()
+    else:
+        cv.WAVELENGTH_LIST = None
 
     return error.NO_ERROR

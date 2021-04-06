@@ -42,8 +42,8 @@ class CubeWindow(QDialog):
 
         self.setLayout(self.layout)
 
-        renderer = vtk.vtkRenderer()
-        self.renWinInteractor.GetRenderWindow().AddRenderer(renderer)
+        self.renderer = vtk.vtkRenderer()
+        self.renWinInteractor.GetRenderWindow().AddRenderer(self.renderer)
         interactor = self.renWinInteractor.GetRenderWindow().GetInteractor()
 
         datacube = cv.DATACUBE
@@ -105,11 +105,20 @@ class CubeWindow(QDialog):
             actor_list.append(actor)
 
         for actor in actor_list:
-            renderer.AddActor(actor)
+            self.renderer.AddActor(actor)
 
-        renderer.ResetCamera()
-        renderer.GetActiveCamera().Azimuth(30)
-        renderer.GetActiveCamera().Elevation(30)
+        self.renderer.ResetCamera()
+        self.renderer.GetActiveCamera().Azimuth(30)
+        self.renderer.GetActiveCamera().Elevation(30)
 
         interactor.Initialize()
         interactor.Start()
+
+    def closeEvent(self, event):
+        """Actions to be done on closing the window
+
+        :param event: event that triggered closeEvent
+
+        :return: None
+        """
+        self.renWinInteractor.Finalize()
