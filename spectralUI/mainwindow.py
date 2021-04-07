@@ -60,10 +60,10 @@ class MainWindow(QMainWindow):
             pass
 
         # initialize color map and app style if settings does not exist
+        vd.DEFAULT_STYLE = QStyleFactory.keys()[0]
         if not self.settings.contains("color map"):
             self.settings.setValue("color map", vd.DEFAULT_COLOR_MAP)
         if not self.settings.contains("style"):
-            vd.DEFAULT_STYLE = QStyleFactory.keys()[0]
             self.settings.setValue("style", vd.DEFAULT_STYLE)
 
         cv.CURRENT_CMAP = self.settings.value("color map")
