@@ -1,4 +1,4 @@
-# spectralUI Prototype <img src="./resources/icons/application_icon.png" width="24">
+# spectralUI <img src="./resources/icons/application_icon.png" width="24">
 
 spectralUI is an open source cross platform, general purpose tool for analyzing multispectral and hyperspectral images.
 
@@ -23,8 +23,8 @@ spectralUI is an open source cross platform, general purpose tool for analyzing 
 
 Clone the repository and cd into it
 ```bash
-git clone https://www.github.com/TomAmpiath/spectralUI_Prototype
-cd spectralUI_Prototype
+git clone https://www.github.com/TomAmpiath/spectralUI
+cd spectralUI
 ```
 
 Create a virtual environment using:
