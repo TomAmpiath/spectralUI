@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QPushButton, QVBoxLayout, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QPushButton, QVBoxLayout, QWidget
 
 from spectralUI import instancehandler as ih
 from spectralUI.imageviewer.colorimageviewer.colorimage import ColorImage
@@ -49,4 +49,4 @@ class ColorImageViewer(QWidget):
     def open_viewer(self):
         """Open spectral cube viewer window"""
         self.cube_window = CubeWindow()
-        self.cube_window.exec_()
+        self.cube_window.exec()

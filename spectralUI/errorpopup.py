@@ -17,7 +17,7 @@
 
 import sys
 
-from PySide2.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 from spectralUI.backend import error
 
@@ -38,7 +38,7 @@ def error_popup(error_id):
     icon = QMessageBox.Critical if lvl == error.CRITICAL else QMessageBox.Warning
     message_box.setIcon(icon)
 
-    message_box.exec_()
+    message_box.exec()
 
     if lvl == error.CRITICAL:
         sys.exit(1)

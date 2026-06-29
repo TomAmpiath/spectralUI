@@ -16,8 +16,8 @@
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
 from matplotlib import pyplot as plt
-from PySide2.QtCore import QSettings
-from PySide2.QtWidgets import (
+from PySide6.QtCore import QSettings
+from PySide6.QtWidgets import (
     QComboBox,
     QDialog,
     QHBoxLayout,

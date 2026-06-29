@@ -17,7 +17,7 @@
 
 import sys
 
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 
 from spectralUI import instancehandler as ih
 from spectralUI.mainwindow import MainWindow
@@ -34,7 +34,7 @@ class Application(QApplication):
         main_window = MainWindow()
         main_window.show()
 
-        sys.exit(self.exec_())
+        sys.exit(self.exec())
 
 
 def main():

@@ -17,12 +17,12 @@
 
 import matplotlib
 import numpy as np
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+matplotlib.use("qtagg")
+
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
-matplotlib.use("Qt5Agg")
-
-from PySide2.QtCore import QSettings
+from PySide6.QtCore import QSettings
 
 from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih

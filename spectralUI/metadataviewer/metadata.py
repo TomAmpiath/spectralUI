@@ -15,7 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from PySide2.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
+from PySide6.QtWidgets import (
+    QAbstractItemView,
+    QHeaderView,
+    QTableWidget,
+    QTableWidgetItem,
+)
 
 from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih
@@ -32,7 +37,7 @@ class Metadata(QTableWidget):
 
         self.setRowCount(7)
         self.setColumnCount(2)
-        self.setEditTriggers(self.NoEditTriggers)
+        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.setHorizontalHeaderItem(0, QTableWidgetItem("Property"))
         self.setHorizontalHeaderItem(1, QTableWidgetItem("Value"))
         self.setAlternatingRowColors(True)

@@ -16,7 +16,7 @@
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
 import vtk
-from PySide2.QtWidgets import QDialog, QVBoxLayout
+from PySide6.QtWidgets import QDialog, QVBoxLayout
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 
 from spectralUI import cachedvariables as cv

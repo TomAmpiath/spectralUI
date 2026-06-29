@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
-from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QSplitter, QVBoxLayout, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QSplitter, QVBoxLayout, QWidget
 
 from spectralUI.imageviewer.imageviewer import ImageViewer
 from spectralUI.metadataviewer.metadataviewer import MetadataViewer

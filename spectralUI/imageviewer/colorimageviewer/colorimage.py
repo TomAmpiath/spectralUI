@@ -17,13 +17,13 @@
 
 import matplotlib
 import numpy as np
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+matplotlib.use("qtagg")
+
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
 from spectralUI import cachedvariables as cv
 from spectralUI import instancehandler as ih
-
-matplotlib.use("Qt5Agg")
 
 
 class ColorImage(FigureCanvasQTAgg):

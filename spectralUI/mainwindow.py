@@ -17,10 +17,9 @@
 
 import os
 
-from PySide2.QtCore import QSettings
-from PySide2.QtGui import QCloseEvent, QIcon
-from PySide2.QtWidgets import (
-    QAction,
+from PySide6.QtCore import QSettings
+from PySide6.QtGui import QAction, QCloseEvent, QIcon
+from PySide6.QtWidgets import (
     QFileDialog,
     QMainWindow,
     QMessageBox,
@@ -141,7 +140,7 @@ class MainWindow(QMainWindow):
                 datacube = cv.DATACUBE
                 if cv.WAVELENGTH_LIST is None:
                     wavelength_window = WavelengthWindow()
-                    wavelength_window.exec_()
+                    wavelength_window.exec()
                     if wavelength_window.result() == 0:
                         return
 
@@ -178,7 +177,7 @@ class MainWindow(QMainWindow):
     def open_settings_window(self):
         """Open settings winddow"""
         self.settings_window = SettingsWindow()
-        self.settings_window.exec_()
+        self.settings_window.exec()
         if self.settings_window.result() == 0:
             cv.CURRENT_STYLE = self.settings.value("style")
             cv.CURRENT_CMAP = self.settings.value("color map")

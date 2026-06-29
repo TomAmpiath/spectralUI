@@ -16,12 +16,12 @@
 # along with spectralUI.  If not, see <http://www.gnu.org/licenses/>.
 
 import matplotlib
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+matplotlib.use("qtagg")
+
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
 from spectralUI import cachedvariables as cv
-
-matplotlib.use("Qt5Agg")
 
 
 class CmapPreview(FigureCanvasQTAgg):
